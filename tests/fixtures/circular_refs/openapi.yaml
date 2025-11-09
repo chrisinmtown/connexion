@@ -1,0 +1,47 @@
+openapi: "3.0.1"
+
+info:
+  title: "Test circular references"
+  version: "1.0"
+servers:
+  - url: http://localhost:8080/v1.0
+
+paths:
+  /owners:
+    get:
+      summary: Return a list of all registered owners
+      operationId: simple_app.get_owners
+      responses:
+        '200':
+          description: A list of owners
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/owner'
+
+components:
+  schemas:
+    owner:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        widgets:
+          type: array
+          items:
+            $ref: '#/components/schemas/widget'
+    widget:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        owners:
+          type: array
+          items:
+            $ref: '#/components/schemas/owner'

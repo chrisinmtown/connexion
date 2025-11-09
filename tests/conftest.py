@@ -48,6 +48,11 @@ def multiple_yaml_same_basepath_dir():
 
 
 @pytest.fixture(scope="session")
+def circular_refs_dir():
+    return FIXTURES_FOLDER / "circular_refs"
+
+
+@pytest.fixture(scope="session")
 def json_datetime_dir():
     return FIXTURES_FOLDER / "datetime_support"
 
